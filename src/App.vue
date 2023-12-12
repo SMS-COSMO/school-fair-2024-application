@@ -1,12 +1,17 @@
 <template>
-  <div class="ml-auto mr-auto w-80%">
-    <FormItem v-model="form.name.val" :msg="form.name.msg" label="姓名" @update:model-value="onUpdate" />
-    <FormItem v-model="form.id.val" :msg="form.id.msg" label="身份证" @update:model-value="onUpdate" />
-    <FormItem v-model="form.phone.val" :msg="form.phone.msg" label="手机" @update:model-value="onUpdate" />
+  <div class="ml-auto mr-auto w-80vw">
+    <div v-if="!ticketOpen">
+      <FormItem v-model="form.name.val" :msg="form.name.msg" label="姓名" @update:model-value="onUpdate" />
+      <FormItem v-model="form.id.val" :msg="form.id.msg" label="身份证" @update:model-value="onUpdate" />
+      <FormItem v-model="form.phone.val" :msg="form.phone.msg" label="手机" @update:model-value="onUpdate" />
 
-    <button @click="onSubmit">
-      submit
-    </button>
+      <button @click="onSubmit">
+        submit
+      </button>
+    </div>
+    <div v-else>
+      Ticket
+    </div>
   </div>
 </template>
 

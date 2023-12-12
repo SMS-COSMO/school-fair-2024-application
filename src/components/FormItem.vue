@@ -1,10 +1,15 @@
 <template>
-  <div>
-    {{ label }}
-  </div>
-  <input v-model="value" :class="`${msg.length ? 'outline-red-400' : ''}`">
-  <div class="text-red-400">
-    {{ msg }}
+  <div class="mt-4 box-border">
+    <div class="mb-2">
+      {{ label }}
+    </div>
+    <input
+      v-model="value"
+      :class="`${msg.length ? 'border-red-400' : 'border-blueGray'} outline-none border-solid border-1 outline-offset-5 w-full px-3 py-1 rounded-md text-lg box-border`"
+    >
+    <div class="text-red-400 mt-2">
+      {{ msg }}
+    </div>
   </div>
 </template>
 
