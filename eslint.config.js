@@ -9,6 +9,9 @@ export default antfu({
 }, {
   rules: {
     'style/brace-style': ['warn', '1tbs', { allowSingleLine: true }],
+    'vue/block-order': ['error', {
+      order: ['template', 'script', 'style'],
+    }],
   },
   ignores: ['components/ui/**', '.github/**/*'],
 });
