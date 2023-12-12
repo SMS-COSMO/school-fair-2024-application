@@ -1,14 +1,8 @@
 <template>
   <div class="ml-auto mr-auto w-80%">
-    <FormItem :msg="form.name.msg" label="姓名">
-      <input v-model="form.name.val" @input="onUpdate">
-    </FormItem>
-    <FormItem :msg="form.id.msg" label="身份证">
-      <input v-model="form.id.val" @input="onUpdate">
-    </FormItem>
-    <FormItem :msg="form.phone.msg" label="手机">
-      <input v-model="form.phone.val" @input="onUpdate">
-    </FormItem>
+    <FormItem v-model="form.name.val" :msg="form.name.msg" label="姓名" @update:model-value="onUpdate" />
+    <FormItem v-model="form.id.val" :msg="form.id.msg" label="身份证" @update:model-value="onUpdate" />
+    <FormItem v-model="form.phone.val" :msg="form.phone.msg" label="手机" @update:model-value="onUpdate" />
 
     <button @click="onSubmit">
       submit
