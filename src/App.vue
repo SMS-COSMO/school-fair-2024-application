@@ -1,23 +1,24 @@
 <template>
   <div class="ml-auto mr-auto w-80vw">
-    <div v-if="!ticketOpen">
-      <FormItem v-model="form.name.val" :msg="form.name.msg" label="姓名" @update:model-value="onUpdate" />
-      <FormItem v-model="form.id.val" :msg="form.id.msg" label="身份证" @update:model-value="onUpdate" />
-      <FormItem v-model="form.phone.val" :msg="form.phone.msg" label="手机" @update:model-value="onUpdate" />
+    <Transition mode="out-in">
+      <div v-if="!ticketOpen">
+        <FormItem v-model="form.name.val" :msg="form.name.msg" label="姓名" @update:model-value="checkRule('name')" />
+        <FormItem v-model="form.id.val" :msg="form.id.msg" label="身份证" @update:model-value="checkRule('id')" />
+        <FormItem v-model="form.phone.val" :msg="form.phone.msg" label="手机" @update:model-value="checkRule('phone')" />
 
-      <button @click="onSubmit">
-        submit
-      </button>
-    </div>
-    <div v-else>
-      Ticket
-    </div>
+        <button class="mt-4" @click="onSubmit">
+          submit
+        </button>
+      </div>
+      <Ticket v-else :id="form.id.val" :name="form.name.val" :phone="form.phone.val" />
+    </Transition>
   </div>
 </template>
 
 <script setup lang="ts">
 import { reactive, ref } from 'vue';
 import FormItem from './components/FormItem.vue';
+import Ticket from './components/Ticket.vue';
 import type { TForm, TFormFields } from './types';
 
 const form: TForm = reactive({
@@ -37,7 +38,7 @@ const form: TForm = reactive({
 
 const formRule = {
   name: {
-    reg: /.{2,5}/,
+    reg: /^.{2,5}$/,
     msg: '姓名长度应在2~5',
   },
   id: {
@@ -52,27 +53,26 @@ const formRule = {
 
 const ticketOpen = ref(false);
 
-function checkFormRule() {
-  let success = true;
-  for (const field of ['name', 'id', 'phone'] as TFormFields[]) {
-    const { reg, msg } = formRule[field];
-    if (reg.test(form[field].val)) {
-      form[field].msg = '';
-      success = true && success;
-    } else {
-      form[field].msg = msg;
-      success = false;
-    }
+function checkRule(field: TFormFields) {
+  const { reg, msg } = formRule[field];
+  if (reg.test(form[field].val)) {
+    form[field].msg = '';
+    return true;
+  } else {
+    form[field].msg = msg;
+    return false;
   }
-  return success;
 };
 
-function onUpdate() {
-  checkFormRule();
+function checkAllRules() {
+  let success = true;
+  for (const field of ['name', 'id', 'phone'] as TFormFields[])
+    success = checkRule(field) && success;
+  return success;
 }
 
 function onSubmit() {
-  const valid = checkFormRule();
+  const valid = checkAllRules();
   if (!valid)
     return;
 
