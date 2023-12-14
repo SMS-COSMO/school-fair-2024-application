@@ -1,7 +1,7 @@
 <template>
-  <div class="h-[100svh] overflow-scroll scroll relative">
+  <div class="h-[100svh] overflow-scroll scroll relative overflow-x-hidden">
     <div class="h-[100svh] w-screen bg-white flex flex-col justify-center items-center space-y-6">
-      <Cover />
+      <Cover class="w-2/3" />
       <div class="absolute bottom-12 flex space-x-4 justify-center items-center">
         <SMS class="w-auto h-6" />
         <img src="/cosmo-logo.svg" alt="COSMO Slogan" class="w-auto h-6">
