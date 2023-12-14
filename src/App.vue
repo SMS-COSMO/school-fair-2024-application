@@ -1,5 +1,5 @@
 <template>
-  <div class="h-[100svh] overflow-scroll scroll relative" @scroll="handelScroll($event)">
+  <div class="h-[100svh] overflow-scroll scroll relative">
     <div class="h-[100svh] bg-black flex flex-col">
       <SMS class="w-1/2" />
       <span class="text-white">
@@ -34,9 +34,6 @@ import Circle from './components/Shapes/Circle.vue';
 import FormItem from './components/FormItem.vue';
 import Ticket from './components/Ticket.vue';
 import type { TForm, TFormFields } from './types';
-
-function handelScroll(e: any) {
-};
 
 const form: TForm = reactive({
   name: {
