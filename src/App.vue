@@ -8,10 +8,10 @@
       <div class="flex-grow" />
     </div>
     <div class="top-[calc(100svh+40px)] w-screen absolute flex flex-col">
-      <Circle v-motion-pop-visible class="scale-200 ml-auto" />
-      <Triangle v-motion-pop-visible class="scale-200 mt-90" />
+      <Circle v-motion-pop-visible class="scale-200 mt-[5%] ml-auto" />
+      <Triangle v-motion-pop-visible class="scale-200 mt-[80%]" />
     </div>
-    <div v-motion-slide-visible-right class="ml-auto mr-auto w-90vw box-border my-[calc((100svh-440px)/2)] p-6 bg-white rounded-xl flex flex-col shadow-xl ">
+    <div v-motion-slide-visible-right class="ml-auto mr-auto w-90vw box-border my-[calc((100vh-480px)/2)] px-6 py-10 bg-white rounded-xl flex flex-col shadow-xl ">
       <Logo />
       <FormItem v-model="form.name.val" :msg="form.name.msg" label="姓名" @update:model-value="checkRule('name')" />
       <FormItem v-model="form.id.val" :msg="form.id.msg" label="身份证" @update:model-value="checkRule('id')" />
@@ -21,8 +21,10 @@
         预约
       </button>
     </div>
+    <Transition name="up">
+      <Ticket v-show="ticketOpen" :id="form.id.val" class="z-100 fixed top-0 w-screen" :name="form.name.val" :phone="form.phone.val" />
+    </Transition>
   </div>
-  <Ticket v-if="ticketOpen" id="3821839193" name="路人甲" phone="13518290981" />
 </template>
 
 <script setup lang="ts">
@@ -52,8 +54,8 @@ const form: TForm = reactive({
 
 const formRule = {
   name: {
-    reg: /^.{2,5}$/,
-    msg: '姓名长度应在2~5',
+    reg: /^.{2,15}$/,
+    msg: '姓名长度应在2~15',
   },
   id: {
     reg: /^([1-6][1-9]|50)\d{4}(18|19|20)\d{2}((0[1-9])|10|11|12)(([0-2][1-9])|10|20|30|31)\d{3}[0-9Xx]$/,
@@ -103,5 +105,16 @@ function onSubmit() {
 
 .scroll::-webkit-scrollbar {
   display: none; /* Chrome Safari */
+}
+
+.up-enter-active,
+.up-leave-active {
+  transition: all 0.8s cubic-bezier(.5,0,.64,.99);
+}
+
+.up-enter-from,
+.up-leave-to {
+  transform: translateY(50vh);
+  opacity: 0;
 }
 </style>

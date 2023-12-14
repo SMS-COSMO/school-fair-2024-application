@@ -16,3 +16,8 @@ body {
 .v-leave-to {
   opacity: 0;
 }
+
+@font-face {
+  font-family: 'ShuHeiTi';
+  src: url('shuhei.woff2') format('woff2'),
+}
