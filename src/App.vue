@@ -1,11 +1,12 @@
 <template>
   <div class="h-[100svh] overflow-scroll scroll relative">
-    <div class="h-[100svh] bg-black flex flex-col">
-      <SMS class="w-1/2" />
-      <span class="text-white">
-        放个视频？
-      </span>
-      <div class="flex-grow" />
+    <div class="h-[100svh] w-screen bg-white flex flex-col justify-center items-center space-y-6">
+      <Cover />
+      <div class="absolute bottom-12 flex space-x-4 justify-center items-center">
+        <SMS class="w-auto h-6" />
+        <img src="/cosmo-logo.svg" alt="COSMO Slogan" class="w-auto h-6">
+        <img src="/saa-logo.png" alt="SAA Logo" class="w-auto h-12">
+      </div>
     </div>
     <div class="top-[calc(100svh+40px)] w-screen absolute flex flex-col">
       <Circle v-motion-pop-visible class="scale-200 mt-[5%] ml-auto" />
@@ -33,6 +34,7 @@ import Logo from './components/Shapes/Logo.vue';
 import SMS from './components/Shapes/SMS.vue';
 import Triangle from './components/Shapes/Triangle.vue';
 import Circle from './components/Shapes/Circle.vue';
+import Cover from './components/Shapes/Cover.vue';
 import FormItem from './components/FormItem.vue';
 import Ticket from './components/Ticket.vue';
 import type { TForm, TFormFields } from './types';
