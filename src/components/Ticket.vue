@@ -1,16 +1,38 @@
 <template>
-  <div>
-    {{ name }}
-  </div>
-  <div>
-    {{ id }}
-  </div>
-  <div>
-    {{ phone }}
+  <div class="bg-gray-200 min-h-screen flex">
+    <div class="self-center mx-auto">
+      <div class="min-h-[60svh] w-90vw p-8 box-border bg-white rounded-xl shadow-xl flex flex-col">
+        <QR />
+        <Logo class="mt-4" />
+        <div class="flex-grow" />
+        <div class="mt-3 font-bold">
+          <div>姓名</div>
+          <span>{{ name }}</span>
+        </div>
+        <div class="mt-3 font-bold">
+          <div>身份证后六位</div>
+          <span>{{ id.substring(id.length - 6) }}</span>
+        </div>
+        <div class="mt-3 font-bold flex">
+          <div>
+            <div>手机号</div>
+            <span>{{ phone }}</span>
+          </div>
+          <Time class="ml-auto" />
+        </div>
+      </div>
+      <div class="h-40 ml-auto mr-auto w-90vw p-8 box-border bg-[#257ADD] rounded-xl shadow-xl flex flex-col">
+        asas
+      </div>
+    </div>
   </div>
 </template>
 
 <script setup lang="ts">
+import QR from './Shapes/QR.vue';
+import Logo from './Shapes/Logo.vue';
+import Time from './Shapes/Time.vue';
+
 defineProps<{
   name: string
   id: string

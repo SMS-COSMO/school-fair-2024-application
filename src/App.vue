@@ -1,25 +1,42 @@
 <template>
-  <div class="ml-auto mr-auto w-80vw">
-    <Transition mode="out-in">
-      <div v-if="!ticketOpen">
-        <FormItem v-model="form.name.val" :msg="form.name.msg" label="姓名" @update:model-value="checkRule('name')" />
-        <FormItem v-model="form.id.val" :msg="form.id.msg" label="身份证" @update:model-value="checkRule('id')" />
-        <FormItem v-model="form.phone.val" :msg="form.phone.msg" label="手机" @update:model-value="checkRule('phone')" />
+  <div class="h-[100svh] overflow-scroll scroll relative" @scroll="handelScroll($event)">
+    <div class="h-[100svh] bg-black flex flex-col">
+      <SMS class="w-1/2" />
+      <span class="text-white">
+        放个视频？
+      </span>
+      <div class="flex-grow" />
+    </div>
+    <div class="top-[calc(100svh+40px)] w-screen absolute flex flex-col">
+      <Circle v-motion-pop-visible class="scale-200 ml-auto" />
+      <Triangle v-motion-pop-visible class="scale-200 mt-90" />
+    </div>
+    <div v-motion-slide-visible-right class="ml-auto mr-auto w-90vw box-border my-[calc((100svh-440px)/2)] p-6 bg-white rounded-xl flex flex-col shadow-xl ">
+      <Logo />
+      <FormItem v-model="form.name.val" :msg="form.name.msg" label="姓名" @update:model-value="checkRule('name')" />
+      <FormItem v-model="form.id.val" :msg="form.id.msg" label="身份证" @update:model-value="checkRule('id')" />
+      <FormItem v-model="form.phone.val" :msg="form.phone.msg" label="手机" @update:model-value="checkRule('phone')" />
 
-        <button class="mt-4" @click="onSubmit">
-          submit
-        </button>
-      </div>
-      <Ticket v-else :id="form.id.val" :name="form.name.val" :phone="form.phone.val" />
-    </Transition>
+      <button class="mt-4 rounded-md px-4 py-3 bg-black text-white border-none ml-auto" @click="onSubmit">
+        预约
+      </button>
+    </div>
   </div>
+  <Ticket v-if="ticketOpen" id="3821839193" name="路人甲" phone="13518290981" />
 </template>
 
 <script setup lang="ts">
 import { reactive, ref } from 'vue';
+import Logo from './components/Shapes/Logo.vue';
+import SMS from './components/Shapes/SMS.vue';
+import Triangle from './components/Shapes/Triangle.vue';
+import Circle from './components/Shapes/Circle.vue';
 import FormItem from './components/FormItem.vue';
 import Ticket from './components/Ticket.vue';
 import type { TForm, TFormFields } from './types';
+
+function handelScroll(e: any) {
+};
 
 const form: TForm = reactive({
   name: {
@@ -79,3 +96,15 @@ function onSubmit() {
   ticketOpen.value = true;
 }
 </script>
+
+<style scoped>
+.scroll {
+  scrollbar-width: none; /* firefox */
+  -ms-overflow-style: none; /* IE 10+ */
+  background-color: #257ADD;
+}
+
+.scroll::-webkit-scrollbar {
+  display: none; /* Chrome Safari */
+}
+</style>
