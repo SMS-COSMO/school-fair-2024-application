@@ -38,6 +38,7 @@ import Cover from './components/Shapes/Cover.vue';
 import FormItem from './components/FormItem.vue';
 import Ticket from './components/Ticket.vue';
 import type { TForm, TFormFields } from './types';
+import { checkIds } from './utils/checkId';
 
 const form: TForm = reactive({
   name: {
@@ -55,25 +56,20 @@ const form: TForm = reactive({
 });
 
 const formRule = {
-  name: {
-    reg: /^.{2,15}$/,
-    msg: '姓名长度应在2~15',
+  name: (val: string) => {
+    return { res: /^.{2,15}$/.test(val), msg: '姓名长度应在2~15' };
   },
-  id: {
-    reg: /^([1-6][1-9]|50)\d{4}(18|19|20)\d{2}((0[1-9])|10|11|12)(([0-2][1-9])|10|20|30|31)\d{3}[0-9Xx]$/,
-    msg: '请输入正确的身份证号',
-  },
-  phone: {
-    reg: /^1(3\d|4[5-9]|5[0-35-9]|6[2567]|7[0-8]|8\d|9[0-35-9])\d{8}$/,
-    msg: '请输入正确的手机号',
+  id: checkIds,
+  phone: (val: string) => {
+    return { res: /^1(3\d|4[5-9]|5[0-35-9]|6[2567]|7[0-8]|8\d|9[0-35-9])\d{8}$/.test(val), msg: '请输入正确的手机号' };
   },
 };
 
 const ticketOpen = ref(false);
 
 function checkRule(field: TFormFields) {
-  const { reg, msg } = formRule[field];
-  if (reg.test(form[field].val)) {
+  const { res, msg } = formRule[field](form[field].val);
+  if (res) {
     form[field].msg = '';
     return true;
   } else {
