@@ -1,6 +1,6 @@
 <template>
-  <div class="h-[100svh] overflow-scroll scroll main relative overflow-x-hidden">
-    <div class="h-[100svh] w-screen bg-white flex flex-col justify-center items-center space-y-6">
+  <div class="h-[100vh] overflow-scroll scroll main relative overflow-x-hidden">
+    <div class="h-[100vh] w-screen bg-white flex flex-col justify-center items-center space-y-6">
       <Cover class="w-2/3" />
       <div class="absolute bottom-12 flex space-x-4 justify-center items-center">
         <SMS class="w-auto h-6" />
@@ -8,15 +8,15 @@
         <img src="/saa-logo.png" alt="SAA Logo" class="w-auto h-12">
       </div>
     </div>
-    <div class="flex md:flex-row md:gap-10 md:p-10 h-[calc(100svh-5rem)]">
+    <div class="flex md:flex-row md:gap-10 md:p-10 h-[100vh]">
       <div
-        class="self-center h-[100svh] bg-[#257ADD] md:h-[500px] w-screen md:shadow-xl md:rounded-lg md:h-[50%] md:w-[500px] flex flex-col mx-auto md:mr-0 absolute md:relative">
+        class="self-center h-[100vh] bg-[#257ADD] md:h-[500px] w-screen md:shadow-xl md:rounded-lg md:h-[50%] md:w-[500px] flex flex-col mx-auto md:mr-0 absolute md:relative">
         <Circle v-motion-pop-visible class="scale-200 mt-[5%] ml-auto" />
         <div class="flex-grow"></div>
         <Triangle v-motion-pop-visible class="scale-200 mb-[5%]" />
       </div>
       <div v-motion-slide-visible-right
-        class="mx-auto md:ml-0 w-90vw md:w-[500px] box-border max-h-[90svh] scroll overflow-y-scroll self-center px-6 py-10 bg-white rounded-xl flex flex-col shadow-xl ">
+        class="mx-auto md:ml-0 w-90vw md:w-[500px] box-border max-h-[90vh] scroll overflow-y-scroll self-center px-6 py-10 bg-white rounded-xl flex flex-col shadow-xl ">
         <Logo class="min-h-20" />
         <FormItem v-model="form.name.val" :msg="form.name.msg" label="姓名" @update:model-value="checkRule('name')" />
         <FormItem v-model="form.id.val" :msg="form.id.msg" label="身份证" @update:model-value="checkRule('id')" />
