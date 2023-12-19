@@ -9,4 +9,10 @@ export interface TForm {
   phone: TFormItem
 };
 
+export interface TFollowerForm {
+  name: TFormItem
+  id: TFormItem
+};
+
 export type TFormFields = 'name' | 'id' | 'phone';
+export type TFollowerFormFields = 'name' | 'id';

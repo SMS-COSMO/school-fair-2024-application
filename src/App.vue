@@ -1,5 +1,5 @@
 <template>
-  <div class="h-[100svh] overflow-scroll scroll relative overflow-x-hidden">
+  <div class="h-[100svh] overflow-scroll scroll main relative overflow-x-hidden">
     <div class="h-[100svh] w-screen bg-white flex flex-col justify-center items-center space-y-6">
       <Cover class="w-2/3" />
       <div class="absolute bottom-12 flex space-x-4 justify-center items-center">
@@ -8,7 +8,7 @@
         <img src="/saa-logo.png" alt="SAA Logo" class="w-auto h-12">
       </div>
     </div>
-    <div class="flex md:flex-row md:gap-10 md:p-10 h-[100svh]">
+    <div class="flex md:flex-row md:gap-10 md:p-10 h-[calc(100svh-5rem)]">
       <div
         class="self-center h-[100svh] bg-[#257ADD] md:h-[500px] w-screen md:shadow-xl md:rounded-lg md:h-[50%] md:w-[500px] flex flex-col mx-auto md:mr-0 absolute md:relative">
         <Circle v-motion-pop-visible class="scale-200 mt-[5%] ml-auto" />
@@ -16,12 +16,14 @@
         <Triangle v-motion-pop-visible class="scale-200 mb-[5%]" />
       </div>
       <div v-motion-slide-visible-right
-        class="mx-auto md:ml-0 w-90vw md:w-[500px] box-border self-center px-6 py-10 bg-white rounded-xl flex flex-col shadow-xl ">
-        <Logo />
+        class="mx-auto md:ml-0 w-90vw md:w-[500px] box-border max-h-[90svh] scroll overflow-y-scroll self-center px-6 py-10 bg-white rounded-xl flex flex-col shadow-xl ">
+        <Logo class="min-h-20" />
         <FormItem v-model="form.name.val" :msg="form.name.msg" label="姓名" @update:model-value="checkRule('name')" />
         <FormItem v-model="form.id.val" :msg="form.id.msg" label="身份证" @update:model-value="checkRule('id')" />
         <FormItem v-model="form.phone.val" :msg="form.phone.msg" label="手机" @update:model-value="checkRule('phone')" />
 
+        <Followers v-for="f in followers" @delete="followers--"></Followers>
+        <button @click="followers++" :disabled="followers >= 5" class="mt-4 rounded-md px-4 py-2 bg-black text-white border-none">添加同行人</button>
         <button class="mt-4 rounded-md px-4 py-3 bg-black text-white border-none ml-auto" @click="onSubmit">
           预约
         </button>
@@ -43,6 +45,7 @@ import Circle from './components/Shapes/Circle.vue';
 import Cover from './components/Shapes/Cover.vue';
 import FormItem from './components/FormItem.vue';
 import Ticket from './components/Ticket.vue';
+import Followers from './components/Followers.vue';
 import type { TForm, TFormFields } from './types';
 import { checkIds } from './utils/checkId';
 
@@ -98,6 +101,8 @@ function onSubmit() {
 
   ticketOpen.value = true;
 }
+
+const followers = ref(0);
 </script>
 
 <style scoped>
@@ -106,11 +111,14 @@ function onSubmit() {
   /* firefox */
   -ms-overflow-style: none;
   /* IE 10+ */
+}
+
+.main {
   background-color: #257ADD;
 }
 
 @media only screen and (min-width: 640px) {
-  .scroll {
+  .main {
     background-color: #FAFAFA;
   }
 }
