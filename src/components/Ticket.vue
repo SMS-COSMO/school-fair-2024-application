@@ -1,7 +1,7 @@
 <template>
   <div class="bg-gray-200 min-h-screen flex">
     <div class="self-center mx-auto">
-      <div class="min-h-[60svh] w-90vw p-8 box-border bg-white rounded-xl flex flex-col" style="font-family: 'ShuHeiTi';">
+      <div class="min-h-[60svh] max-w-[800px] p-8 box-border bg-white rounded-xl flex flex-col">
         <QR class="w-full h-auto" />
         <Logo class="mt-4" />
         <div class="flex-grow" />
