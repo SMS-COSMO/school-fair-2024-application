@@ -8,22 +8,28 @@
         <img src="/saa-logo.png" alt="SAA Logo" class="w-auto h-12">
       </div>
     </div>
-    <div class="top-[calc(100svh+40px)] w-screen absolute flex flex-col">
-      <Circle v-motion-pop-visible class="scale-200 mt-[5%] ml-auto" />
-      <Triangle v-motion-pop-visible class="scale-200 mt-[80%]" />
-    </div>
-    <div v-motion-slide-visible-right class="ml-auto mr-auto w-90vw box-border my-[calc((100vh-480px)/2)] px-6 py-10 bg-white rounded-xl flex flex-col shadow-xl ">
-      <Logo />
-      <FormItem v-model="form.name.val" :msg="form.name.msg" label="姓名" @update:model-value="checkRule('name')" />
-      <FormItem v-model="form.id.val" :msg="form.id.msg" label="身份证" @update:model-value="checkRule('id')" />
-      <FormItem v-model="form.phone.val" :msg="form.phone.msg" label="手机" @update:model-value="checkRule('phone')" />
+    <div class="flex md:flex-row md:gap-10 md:p-10 h-[100svh]">
+      <div
+        class="self-center h-[100svh] bg-[#257ADD] md:h-[500px] w-screen md:shadow-xl md:rounded-lg md:h-[50%] md:w-[500px] flex flex-col mx-auto md:mr-0 absolute md:relative">
+        <Circle v-motion-pop-visible class="scale-200 mt-[5%] ml-auto" />
+        <div class="flex-grow"></div>
+        <Triangle v-motion-pop-visible class="scale-200 mb-[5%]" />
+      </div>
+      <div v-motion-slide-visible-right
+        class="mx-auto md:ml-0 w-90vw md:w-[500px] box-border self-center px-6 py-10 bg-white rounded-xl flex flex-col shadow-xl ">
+        <Logo />
+        <FormItem v-model="form.name.val" :msg="form.name.msg" label="姓名" @update:model-value="checkRule('name')" />
+        <FormItem v-model="form.id.val" :msg="form.id.msg" label="身份证" @update:model-value="checkRule('id')" />
+        <FormItem v-model="form.phone.val" :msg="form.phone.msg" label="手机" @update:model-value="checkRule('phone')" />
 
-      <button class="mt-4 rounded-md px-4 py-3 bg-black text-white border-none ml-auto" @click="onSubmit">
-        预约
-      </button>
+        <button class="mt-4 rounded-md px-4 py-3 bg-black text-white border-none ml-auto" @click="onSubmit">
+          预约
+        </button>
+      </div>
     </div>
     <Transition name="up">
-      <Ticket v-show="ticketOpen" :id="form.id.val" class="z-100 fixed top-0 w-screen" :name="form.name.val" :phone="form.phone.val" />
+      <Ticket v-show="ticketOpen" :id="form.id.val" class="z-100 fixed top-0 w-screen" :name="form.name.val"
+        :phone="form.phone.val" />
     </Transition>
   </div>
 </template>
@@ -96,18 +102,27 @@ function onSubmit() {
 
 <style scoped>
 .scroll {
-  scrollbar-width: none; /* firefox */
-  -ms-overflow-style: none; /* IE 10+ */
+  scrollbar-width: none;
+  /* firefox */
+  -ms-overflow-style: none;
+  /* IE 10+ */
   background-color: #257ADD;
 }
 
+@media only screen and (min-width: 640px) {
+  .scroll {
+    background-color: #FAFAFA;
+  }
+}
+
 .scroll::-webkit-scrollbar {
-  display: none; /* Chrome Safari */
+  display: none;
+  /* Chrome Safari */
 }
 
 .up-enter-active,
 .up-leave-active {
-  transition: all 0.8s cubic-bezier(.5,0,.64,.99);
+  transition: all 0.8s cubic-bezier(.5, 0, .64, .99);
 }
 
 .up-enter-from,
